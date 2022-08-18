@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/GoAdminGroup/go-admin/modules/system"
+	"github.com/huyongchao98/go-admin/modules/system"
 	"github.com/magiconair/properties/assert"
 )
 

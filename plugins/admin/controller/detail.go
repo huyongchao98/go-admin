@@ -3,16 +3,16 @@ package controller
 import (
 	"fmt"
 
-	"github.com/GoAdminGroup/go-admin/context"
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
-	form2 "github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/GoAdminGroup/go-admin/template/types/form"
+	"github.com/huyongchao98/go-admin/context"
+	"github.com/huyongchao98/go-admin/modules/auth"
+	"github.com/huyongchao98/go-admin/modules/language"
+	"github.com/huyongchao98/go-admin/plugins/admin/modules"
+	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
+	form2 "github.com/huyongchao98/go-admin/plugins/admin/modules/form"
+	"github.com/huyongchao98/go-admin/plugins/admin/modules/parameter"
+	"github.com/huyongchao98/go-admin/template"
+	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/huyongchao98/go-admin/template/types/form"
 )
 
 func (h *Handler) ShowDetail(ctx *context.Context) {

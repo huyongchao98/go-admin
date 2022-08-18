@@ -43,12 +43,13 @@ func (h *Handler) Auth(ctx *context.Context) {
 	if !exist {
 		password := ctx.FormValue("password")
 		username := ctx.FormValue("username")
+		loginByMobile := ctx.FormValue("loginByMobile")
 
 		if password == "" || username == "" {
 			response.BadRequest(ctx, "wrong password or username")
 			return
 		}
-		user, ok = auth.Check(password, username, h.conn)
+		user, ok = auth.Check(password, username, loginByMobile, h.conn)
 	} else {
 		user, ok, errMsg = auth.GetService(s).P(ctx)
 	}

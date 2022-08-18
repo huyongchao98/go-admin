@@ -32,6 +32,10 @@ type UserModel struct {
 	Level         string            `json:"level"`
 	LevelName     string            `json:"level_name"`
 
+	CodeAt    string `json:"code_at"`
+	CodeCount int64  `json:"code_count"`
+	Code      string `json:"code"`
+
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 
@@ -408,6 +412,32 @@ func (t UserModel) UpdatePwd(password string) UserModel {
 		})
 
 	t.Password = password
+	return t
+}
+
+// UpdatePwd update the password of the user model.
+func (t UserModel) UpdateCodeCount(codeCount int64) UserModel {
+
+	_, _ = t.Table(t.TableName).
+		Where("id", "=", t.Id).
+		Update(dialect.H{
+			"code_count": codeCount,
+		})
+
+	t.CodeCount = codeCount
+	return t
+}
+
+// UpdatePwd update the password of the user model.
+func (t UserModel) ClearCode() UserModel {
+
+	_, _ = t.Table(t.TableName).
+		Where("id", "=", t.Id).
+		Update(dialect.H{
+			"code": nil,
+		})
+
+	t.Code = ""
 	return t
 }
 

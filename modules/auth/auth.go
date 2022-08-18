@@ -6,6 +6,7 @@ package auth
 
 import (
 	"sync"
+	"time"
 
 	"github.com/huyongchao98/go-admin/modules/db/dialect"
 	"github.com/huyongchao98/go-admin/modules/logger"
@@ -24,19 +25,40 @@ func Auth(ctx *context.Context) models.UserModel {
 }
 
 // Check check the password and username and return the user model.
-func Check(password string, username string, conn db.Connection) (user models.UserModel, ok bool) {
+func Check(password string, username string, loginByMobile string, conn db.Connection) (user models.UserModel, ok bool) {
 
 	user = models.User().SetConn(conn).FindByUserName(username)
 
 	if user.IsEmpty() {
 		ok = false
 	} else {
-		if comparePassword(password, user.Password) {
-			ok = true
-			user = user.WithRoles().WithPermissions().WithMenus()
-			user.UpdatePwd(EncodePassword([]byte(password)))
+		if loginByMobile == "1" {
+			codeCount := user.CodeCount
+			codeAt := user.CodeAt
+			codeAtTime, _ := time.Parse("2006-01-02 15:04:05", codeAt)
+			now := time.Now()
+
+			if codeCount > 2 {
+				ok = false
+			} else if now.Add(-1 * time.Minute).After(codeAtTime) {
+				ok = false
+				user.UpdateCodeCount(codeCount + 1)
+			} else if comparePassword(password, user.Code) {
+				ok = true
+				user = user.WithRoles().WithPermissions().WithMenus()
+				user.ClearCode()
+			} else {
+				ok = false
+				user.UpdateCodeCount(codeCount + 1)
+			}
 		} else {
-			ok = false
+			if comparePassword(password, user.Password) {
+				ok = true
+				user = user.WithRoles().WithPermissions().WithMenus()
+				user.UpdatePwd(EncodePassword([]byte(password)))
+			} else {
+				ok = false
+			}
 		}
 	}
 	return

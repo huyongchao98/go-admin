@@ -12,15 +12,15 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/engine"
+	cfg "github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/go-chi/chi"
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/engine"
-	cfg "github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/template/types"
 )
 
 // Chi structure value is a Chi GoAdmin adapter.
@@ -221,9 +221,4 @@ func (ch *Chi) FormParam() url.Values {
 // IsPjax implements the method Adapter.IsPjax.
 func (ch *Chi) IsPjax() bool {
 	return ch.ctx.Request.Header.Get(constant.PjaxHeader) == "true"
-}
-
-// Query implements the method Adapter.Query.
-func (ch *Chi) Query() url.Values {
-	return ch.ctx.Request.URL.Query()
 }

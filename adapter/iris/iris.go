@@ -11,16 +11,16 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/kataras/iris/v12"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
 )
 
 // Iris structure value is an Iris GoAdmin adapter.
@@ -168,9 +168,4 @@ func (is *Iris) FormParam() url.Values {
 // IsPjax implements the method Adapter.IsPjax.
 func (is *Iris) IsPjax() bool {
 	return is.ctx.GetHeader(constant.PjaxHeader) == "true"
-}
-
-// Query implements the method Adapter.Query.
-func (is *Iris) Query() url.Values {
-	return is.ctx.Request().URL.Query()
 }

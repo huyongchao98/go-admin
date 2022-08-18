@@ -11,7 +11,4 @@ const (
 	Title = "GoAdmin"
 
 	ContextNodeNeedAuth = "need_auth"
-
-	IframeKey   = "__goadmin_iframe"
-	IframeIDKey = "__goadmin_iframe_id"
 )

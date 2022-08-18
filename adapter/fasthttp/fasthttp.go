@@ -12,15 +12,15 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/buaazp/fasthttprouter"
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/template/types"
 	"github.com/valyala/fasthttp"
 )
 
@@ -230,16 +230,4 @@ func (fast *Fasthttp) FormParam() url.Values {
 // IsPjax implements the method Adapter.IsPjax.
 func (fast *Fasthttp) IsPjax() bool {
 	return string(fast.ctx.Request.Header.Peek(constant.PjaxHeader)) == "true"
-}
-
-// Query implements the method Adapter.Query.
-func (fast *Fasthttp) Query() url.Values {
-	queryStr := fast.ctx.URI().QueryString()
-	queryObj, err := url.Parse(string(queryStr))
-
-	if err != nil {
-		return url.Values{}
-	}
-
-	return queryObj.Query()
 }

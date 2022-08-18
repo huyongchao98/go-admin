@@ -6,8 +6,8 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/template/types/form"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/template/types/form"
 )
 
 type DisplayFnGenerator interface {
@@ -147,7 +147,7 @@ func (f FieldDisplay) ToDisplayStringArrayArray(value FieldModel) [][]string {
 func (f FieldDisplay) AddLimit(limit int) DisplayProcessFnChains {
 	return f.DisplayProcessChains.Add(func(value FieldModel) interface{} {
 		if limit > len(value.Value) {
-			return value.Value
+			return value
 		} else if limit < 0 {
 			return ""
 		} else {

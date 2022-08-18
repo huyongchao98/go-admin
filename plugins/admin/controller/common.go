@@ -8,22 +8,22 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/huyongchao98/go-admin/template/types/action"
+	"github.com/GoAdminGroup/go-admin/template/types/action"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	c "github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/modules/service"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/icon"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	c "github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/modules/service"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 type Handler struct {
@@ -69,8 +69,8 @@ func (h *Handler) UpdateCfg(cfg Config) {
 	h.generators = cfg.Generators
 }
 
-func (h *Handler) SetCaptcha(captcha map[string]string) {
-	h.captchaConfig = captcha
+func (h *Handler) SetCaptcha(cap map[string]string) {
+	h.captchaConfig = cap
 }
 
 func (h *Handler) SetRoutes(r context.RouterMap) {
@@ -198,11 +198,11 @@ func (h *Handler) ExecuteWithBtns(ctx *context.Context, user models.UserModel, p
 		TmplName:   tmplName,
 		Tmpl:       tmpl,
 		Panel:      panel,
-		Config:     h.config,
+		Config:     *h.config,
 		Menu:       menu.GetGlobalMenu(user, h.conn, ctx.Lang(), plugName).SetActiveClass(h.config.URLRemovePrefix(ctx.Path())),
 		Animation:  option.Animation,
 		Buttons:    btns,
-		Iframe:     ctx.IsIframe(),
+		Iframe:     ctx.Query(constant.IframeKey) == "true",
 		IsPjax:     isPjax(ctx),
 		NoCompress: option.NoCompress,
 	})
@@ -219,11 +219,11 @@ func (h *Handler) Execute(ctx *context.Context, user models.UserModel, panel typ
 		TmplName:   tmplName,
 		Tmpl:       tmpl,
 		Panel:      panel,
-		Config:     h.config,
+		Config:     *h.config,
 		Menu:       menu.GetGlobalMenu(user, h.conn, ctx.Lang(), plugName).SetActiveClass(h.config.URLRemovePrefix(ctx.Path())),
 		Animation:  option.Animation,
 		Buttons:    (*h.navButtons).CheckPermission(user),
-		Iframe:     ctx.IsIframe(),
+		Iframe:     ctx.Query(constant.IframeKey) == "true",
 		IsPjax:     isPjax(ctx),
 		NoCompress: option.NoCompress,
 	})

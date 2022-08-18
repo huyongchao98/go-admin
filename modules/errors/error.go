@@ -4,8 +4,8 @@ import (
 	"errors"
 	"html/template"
 
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/template/icon"
 )
 
 var (

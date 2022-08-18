@@ -5,23 +5,18 @@ var projectTemplate = map[string]string{
 package main
 
 import (
-	"context"
-	"errors"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"os/signal"
-	"syscall"
-	"time"
 
-	_ "github.com/huyongchao98/go-admin/adapter/gin"                    // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}" // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/gin"                    // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}" // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                       // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/gin-gonic/gin"
 	
 	"{{.Module}}/pages"
@@ -58,32 +53,13 @@ func startServer() {
 
 	{{if ne .Orm ""}}models.Init(eng.{{title .Driver}}Connection()){{end}}
 
-	srv := &http.Server{
-		Addr:    ":{{.Port}}",
-		Handler: r,
-	}
-
-	go func() {
-		if err := srv.ListenAndServe(); err != nil && errors.Is(err, http.ErrServerClosed) {
-			log.Printf("listen: %s\n", err)
-		}
-	}()
+	_ = r.Run(":{{.Port}}")
 
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(quit, os.Interrupt)
 	<-quit
-	log.Println("Shutting down server...")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Server forced to shutdown:", err)
-	}
 	log.Print("closing database connection")
 	eng.{{title .Driver}}Connection().Close()
-
-	log.Println("Server exiting")
 }
 {{end}}`,
 
@@ -95,13 +71,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/beego"                   // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/beego"                   // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/astaxie/beego"
 
 	"{{.Module}}/pages"
@@ -156,13 +132,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/buffalo"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/buffalo"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/gobuffalo/buffalo"	
 
 	"{{.Module}}/pages"
@@ -222,13 +198,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	_ "github.com/huyongchao98/go-admin/adapter/chi"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/chi"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/go-chi/chi"
 
 	"{{.Module}}/pages"
@@ -305,13 +281,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/echo"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/echo"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/labstack/echo/v4"
 
 	"{{.Module}}/pages"
@@ -363,13 +339,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/fasthttp"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/fasthttp"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/buaazp/fasthttprouter"
 	"github.com/valyala/fasthttp"
 
@@ -424,13 +400,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/gf"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/gf"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/gogf/gf/frame/g"
 
 	"{{.Module}}/pages"
@@ -484,13 +460,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/gorilla"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/gorilla"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/gorilla/mux"
 
 	"{{.Module}}/pages"
@@ -544,13 +520,13 @@ import (
 	"os"
 	"os/signal"
 
-	_ "github.com/huyongchao98/go-admin/adapter/iris"                 // web framework adapter
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
+	_ "github.com/GoAdminGroup/go-admin/adapter/iris"                 // web framework adapter
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/{{.DriverModule}}"  // sql driver
 	_ "github.com/GoAdminGroup/themes/{{.Theme}}"                        // ui theme
 
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/kataras/iris/v12"
 
 	"{{.Module}}/pages"
@@ -604,11 +580,11 @@ func startServer() {
 var swordIndexPage = []byte(`package pages
 
 import (
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/config"
-	template2 "github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	template2 "github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/themes/sword/components/card"
 	"github.com/GoAdminGroup/themes/sword/components/chart_legend"
 	"github.com/GoAdminGroup/themes/sword/components/description"
@@ -877,11 +853,11 @@ like Aldus PageMaker including versions of Lorem Ipsum.
 var adminlteIndexPage = []byte(`package pages
 
 import (
-	"github.com/huyongchao98/go-admin/context"
-	tmpl "github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
-	"github.com/huyongchao98/go-admin/template/icon"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	tmpl "github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/GoAdminGroup/themes/adminlte/components/chart_legend"
 	"github.com/GoAdminGroup/themes/adminlte/components/description"
 	"github.com/GoAdminGroup/themes/adminlte/components/infobox"
@@ -1273,11 +1249,11 @@ var mainTest = []byte(`package main
 
 import (
 	"./tables"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/tests"
-	"github.com/huyongchao98/go-admin/tests/common"
-	"github.com/huyongchao98/go-admin/tests/frameworks/gin"
-	"github.com/huyongchao98/go-admin/tests/web"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/tests"
+	"github.com/GoAdminGroup/go-admin/tests/common"
+	"github.com/GoAdminGroup/go-admin/tests/frameworks/gin"
+	"github.com/GoAdminGroup/go-admin/tests/web"
 	"github.com/gavv/httpexpect"
 	"log"
 	"testing"
@@ -1321,11 +1297,11 @@ var mainTestCN = []byte(`package main
 
 import (
 	"./tables"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/tests"
-	"github.com/huyongchao98/go-admin/tests/common"
-	"github.com/huyongchao98/go-admin/tests/frameworks/gin"
-	"github.com/huyongchao98/go-admin/tests/web"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/tests"
+	"github.com/GoAdminGroup/go-admin/tests/common"
+	"github.com/GoAdminGroup/go-admin/tests/frameworks/gin"
+	"github.com/GoAdminGroup/go-admin/tests/web"
 	"github.com/gavv/httpexpect"
 	"log"
 	"testing"
@@ -1438,7 +1414,7 @@ var readme = `# GoAdmin Instruction
 
 GoAdmin is a golang framework help gopher quickly build a data visualization platform. 
 
-- [github](https://github.com/huyongchao98/go-admin)
+- [github](https://github.com/GoAdminGroup/go-admin)
 - [forum](http://discuss.go-admin.com)
 - [document](https://book.go-admin.cn)
 
@@ -1481,7 +1457,7 @@ var readmeCN = `# GoAdmin 介绍
 
 GoAdmin 是一个帮你快速搭建数据可视化管理应用平台的框架。 
 
-- [github](https://github.com/huyongchao98/go-admin)
+- [github](https://github.com/GoAdminGroup/go-admin)
 - [论坛](http://discuss.go-admin.com)
 - [文档](https://book.go-admin.cn)
 

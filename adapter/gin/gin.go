@@ -11,15 +11,15 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/gin-gonic/gin"
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/template/types"
 )
 
 // Gin structure value is a Gin GoAdmin adapter.
@@ -165,9 +165,4 @@ func (gins *Gin) FormParam() url.Values {
 // IsPjax implements the method Adapter.IsPjax.
 func (gins *Gin) IsPjax() bool {
 	return gins.ctx.Request.Header.Get(constant.PjaxHeader) == "true"
-}
-
-// Query implements the method Adapter.Query.
-func (gins *Gin) Query() url.Values {
-	return gins.ctx.Request.URL.Query()
 }

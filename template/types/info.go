@@ -9,18 +9,18 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/config"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/utils"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/parameter"
-	"github.com/huyongchao98/go-admin/template/types/form"
-	"github.com/huyongchao98/go-admin/template/types/table"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
+	"github.com/GoAdminGroup/go-admin/template/types/form"
+	"github.com/GoAdminGroup/go-admin/template/types/table"
 )
 
 // FieldModel is the single query result.
@@ -147,13 +147,12 @@ type Field struct {
 
 	Joins Joins
 
-	Width       int
-	Sortable    bool
-	EditAble    bool
-	Fixed       bool
-	Filterable  bool
-	Hide        bool
-	HideForList bool
+	Width      int
+	Sortable   bool
+	EditAble   bool
+	Fixed      bool
+	Filterable bool
+	Hide       bool
 
 	EditType    table.Type
 	EditOptions FieldOptions
@@ -345,9 +344,6 @@ func (f FieldList) GetTheadAndFilterForm(info TableInfo, params parameter.Parame
 		if field.Hide {
 			continue
 		}
-		if field.HideForList {
-			continue
-		}
 		thead = append(thead, TheadItem{
 			Head:       field.Head,
 			Sortable:   field.Sortable,
@@ -447,16 +443,17 @@ func (f FieldList) GetFieldByFieldName(name string) Field {
 
 // Join store join table info. For example:
 //
-//	Join {
-//	    BaseTable:   "users",
-//	    Field:       "role_id",
-//	    Table:       "roles",
-//	    JoinField:   "id",
-//	}
+// Join {
+//     BaseTable:   "users",
+//     Field:       "role_id",
+//     Table:       "roles",
+//     JoinField:   "id",
+// }
 //
 // It will generate the join table sql like:
 //
 // ... left join roles on roles.id = users.role_id ...
+//
 type Join struct {
 	Table      string
 	TableAlias string
@@ -1381,27 +1378,22 @@ func (i *InfoPanel) FieldFilterOnChooseAjax(field, url string, handler Handler) 
 }
 
 func (i *InfoPanel) FieldFilterOnChooseHide(value string, field ...string) *InfoPanel {
-	i.FooterHtml += chooseHideJS(i.FieldList[i.curFieldListIndex].Field, []string{value}, field...)
+	i.FooterHtml += chooseHideJS(i.FieldList[i.curFieldListIndex].Field, value, field...)
 	return i
 }
 
 func (i *InfoPanel) FieldFilterOnChooseShow(value string, field ...string) *InfoPanel {
-	i.FooterHtml += chooseShowJS(i.FieldList[i.curFieldListIndex].Field, []string{value}, field...)
+	i.FooterHtml += chooseShowJS(i.FieldList[i.curFieldListIndex].Field, value, field...)
 	return i
 }
 
 func (i *InfoPanel) FieldFilterOnChooseDisable(value string, field ...string) *InfoPanel {
-	i.FooterHtml += chooseDisableJS(i.FieldList[i.curFieldListIndex].Field, []string{value}, field...)
+	i.FooterHtml += chooseDisableJS(i.FieldList[i.curFieldListIndex].Field, value, field...)
 	return i
 }
 
 func (i *InfoPanel) FieldHide() *InfoPanel {
 	i.FieldList[i.curFieldListIndex].Hide = true
-	return i
-}
-
-func (i *InfoPanel) FieldHideForList() *InfoPanel {
-	i.FieldList[i.curFieldListIndex].HideForList = true
 	return i
 }
 
@@ -1645,29 +1637,9 @@ func (i *InfoPanel) HideDetailButton() *InfoPanel {
 	return i
 }
 
-func (i *InfoPanel) HideCheckBoxColumn() *InfoPanel {
-	return i.HideColumn(1)
-}
-
-func (i *InfoPanel) HideColumn(n int) *InfoPanel {
-	i.AddCSS(template.CSS(fmt.Sprintf(`
-	.box-body table.table tbody tr td:nth-child(%v), .box-body table.table tbody tr th:nth-child(%v) {
-		display: none;
-	}`, n, n)))
-	return i
-}
-
 func (i *InfoPanel) addFooterHTML(footer template.HTML) *InfoPanel {
 	i.FooterHtml += template.HTML(ParseTableDataTmpl(footer))
 	return i
-}
-
-func (i *InfoPanel) AddCSS(css template.CSS) *InfoPanel {
-	return i.addFooterHTML(template.HTML("<style>" + css + "</style>"))
-}
-
-func (i *InfoPanel) AddJS(js template.JS) *InfoPanel {
-	return i.addFooterHTML(template.HTML("<script>" + js + "</script>"))
 }
 
 func (i *InfoPanel) addCallback(node context.Node) *InfoPanel {

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
 	"github.com/gavv/httpexpect"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
 )
 
 func menuTest(e *httpexpect.Expect, sesID *http.Cookie) {

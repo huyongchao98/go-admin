@@ -5,21 +5,21 @@ import (
 	template2 "html/template"
 	"net/url"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	form2 "github.com/huyongchao98/go-admin/plugins/admin/modules/form"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/guard"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/parameter"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/response"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	form2 "github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/guard"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // ShowMenu show menu info page.
@@ -79,7 +79,7 @@ func (h *Handler) showNewMenu(ctx *context.Context, err error) {
 			}).
 			SetOperationFooter(formFooter("new", false, false, false,
 				panel.GetForm().FormNewBtnWord)),
-			false, ctx.IsIframe(), false, ""),
+			false, ctx.Query(constant.IframeKey) == "true", false, ""),
 		Description: template2.HTML(panel.GetForm().Description),
 		Title:       template2.HTML(panel.GetForm().Title),
 	}, plugName)
@@ -137,7 +137,7 @@ func (h *Handler) showEditMenu(ctx *context.Context, plugName string, formInfo t
 			SetHiddenFields(map[string]string{
 				form2.TokenKey:    h.authSrv().AddToken(),
 				form2.PreviousKey: h.routePath("menu") + params,
-			}), false, ctx.IsIframe(), false, ""),
+			}), false, ctx.Query(constant.IframeKey) == "true", false, ""),
 		Description: template2.HTML(formInfo.Description),
 		Title:       template2.HTML(formInfo.Title),
 	}, plugName)

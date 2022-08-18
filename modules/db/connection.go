@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/service"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/service"
 )
 
 const (
@@ -130,7 +130,6 @@ var ignoreErrors = [...][]string{
 	{
 		"LastInsertId is not supported",
 		"There is no generated identity value",
-		"LastInsertId is not supported by this driver",
 	},
 	// delete
 	{
@@ -141,7 +140,6 @@ var ignoreErrors = [...][]string{
 		"LastInsertId is not supported",
 		"There is no generated identity value",
 		"no affect",
-		"LastInsertId is not supported by this driver",
 	},
 	// query
 	{
@@ -149,7 +147,6 @@ var ignoreErrors = [...][]string{
 		"There is no generated identity value",
 		"no affect",
 		"out of index",
-		"LastInsertId is not supported by this driver",
 	},
 }
 

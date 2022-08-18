@@ -14,16 +14,16 @@ import (
 	"strings"
 	"sync"
 
-	c "github.com/huyongchao98/go-admin/modules/config"
-	errors2 "github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/modules/system"
-	"github.com/huyongchao98/go-admin/modules/utils"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/template/login"
-	"github.com/huyongchao98/go-admin/template/types"
+	c "github.com/GoAdminGroup/go-admin/modules/config"
+	errors2 "github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/modules/system"
+	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/template/login"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // Template is the interface which contains methods of ui components.
@@ -265,8 +265,8 @@ type Component interface {
 	// {{.UrlPrefix}}/assets/login/css/bootstrap.min.css => login/css/bootstrap.min.css
 	//
 	// See:
-	// https://github.com/huyongchao98/go-admin/blob/master/template/login/theme1.tmpl#L32
-	// https://github.com/huyongchao98/go-admin/blob/master/template/login/list.go
+	// https://github.com/GoAdminGroup/go-admin/blob/master/template/login/theme1.tmpl#L32
+	// https://github.com/GoAdminGroup/go-admin/blob/master/template/login/list.go
 	GetAssetList() []string
 
 	// GetAsset return the asset content according to the corresponding url suffix.
@@ -341,7 +341,7 @@ func GetAsset(path string) ([]byte, error) {
 	for _, comp := range compMap {
 		res, err := comp.GetAsset(path)
 		if err == nil {
-			return res, nil
+			return res, err
 		}
 	}
 	return nil, errors.New(path + " not found")
@@ -390,7 +390,7 @@ type ExecuteParam struct {
 	IsPjax     bool
 	Panel      types.Panel
 	Logo       template.HTML
-	Config     *c.Config
+	Config     c.Config
 	Menu       *menu.Menu
 	Animation  bool
 	Buttons    types.Buttons

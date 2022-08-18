@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/huyongchao98/go-admin">
+  <a href="https://github.com/GoAdminGroup/go-admin">
     <img width="48%" alt="go-admin" src="http://quick.go-admin.cn/official/assets/imgs/github_logo.png">
   </a>
 </p>
@@ -7,12 +7,12 @@
     遗失的Golang编写的数据可视化与管理平台构建框架
 </p>
 <p align="center">
-<a href="http://drone.go-admin.com/GoAdminGroup/go-admin"><img alt="Build Status" src="http://drone.go-admin.com/api/badges/GoAdminGroup/go-admin/status.svg?ref=refs/heads/master"></a>
-  <a href="https://goreportcard.com/report/github.com/huyongchao98/go-admin"><img alt="Go Report Card" src="https://camo.githubusercontent.com/59eed852617e19c272a4a4764fd09c669957fe75/68747470733a2f2f676f7265706f7274636172642e636f6d2f62616467652f6769746875622e636f6d2f6368656e6867352f676f2d61646d696e"></a>
-  <a href="https://goreportcard.com/report/github.com/huyongchao98/go-admin"><img alt="golang" src="https://img.shields.io/badge/awesome-golang-blue.svg"></a>
+<a href="https://travis-ci.com/GoAdminGroup/go-admin"><img alt="Go Report Card" src="https://api.travis-ci.com/GoAdminGroup/go-admin.svg?branch=master"></a>
+  <a href="https://goreportcard.com/report/github.com/GoAdminGroup/go-admin"><img alt="Go Report Card" src="https://camo.githubusercontent.com/59eed852617e19c272a4a4764fd09c669957fe75/68747470733a2f2f676f7265706f7274636172642e636f6d2f62616467652f6769746875622e636f6d2f6368656e6867352f676f2d61646d696e"></a>
+  <a href="https://goreportcard.com/report/github.com/GoAdminGroup/go-admin"><img alt="golang" src="https://img.shields.io/badge/awesome-golang-blue.svg"></a>
   <a href="https://t.me/joinchat/NlyH6Bch2QARZkArithKvg" rel="nofollow"><img alt="telegram" src="https://img.shields.io/badge/chat%20on-telegram-blue" style="max-width:100%;"></a>
   <a href="https://shang.qq.com/wpa/qunwpa?idkey=ab18729bba609c220f31516a4eb9fce27f582458bd9a865b46523adb5632b873"><img alt="qq群" src="https://img.shields.io/badge/QQ-874825430-yellow.svg"></a>
-  <a href="https://godoc.org/github.com/huyongchao98/go-admin" rel="nofollow"><img src="https://camo.githubusercontent.com/a9a286d43bdfff9fb41b88b25b35ea8edd2634fc/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f646572656b7061726b65722f64656c76653f7374617475732e737667" alt="GoDoc" data-canonical-src="https://godoc.org/github.com/derekparker/delve?status.svg" style="max-width:100%;"></a>
+  <a href="https://godoc.org/github.com/GoAdminGroup/go-admin" rel="nofollow"><img src="https://camo.githubusercontent.com/a9a286d43bdfff9fb41b88b25b35ea8edd2634fc/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f646572656b7061726b65722f64656c76653f7374617475732e737667" alt="GoDoc" data-canonical-src="https://godoc.org/github.com/derekparker/delve?status.svg" style="max-width:100%;"></a>
   <a href="https://raw.githubusercontent.com/GoAdminGroup/go-admin/master/LICENSE" rel="nofollow"><img src="https://img.shields.io/badge/license-Apache2.0-blue.svg" alt="license" data-canonical-src="https://img.shields.io/badge/license-Apache2.0-blue.svg" style="max-width:100%;"></a>
 </p>
 <p align="center">
@@ -23,8 +23,15 @@
 
 GoAdmin 可以帮助你的golang应用快速实现数据可视化，搭建一个数据管理平台。
 
-[文档](http://doc.go-admin.cn/zh) | [论坛](http://discuss.go-admin.com) | [Demo](https://demo.go-admin.cn) | [上手例子](https://github.com/GoAdminGroup/example/blob/master/README_CN.md) | [GoAdmin+vue 例子](https://github.com/GoAdminGroup/goadmin-vue-example)
+线上论坛：[http://discuss.go-admin.com](http://discuss.go-admin.com)
 
+线上demo：[https://demo.go-admin.cn](https://demo.go-admin.cn)
+
+上手例子：[https://github.com/GoAdminGroup/example](https://github.com/GoAdminGroup/example/blob/master/README_CN.md)
+
+GoAdmin+vue 例子： [https://github.com/GoAdminGroup/goadmin-vue-example](https://github.com/GoAdminGroup/goadmin-vue-example)
+
+[文档地址1](http://doc.go-admin.cn/zh) | [备用文档地址1](https://book.go-admin.cn/zh)
 
 ![](http://file.go-admin.cn/introduction/interface_3.png)
 
@@ -41,7 +48,7 @@ GoAdmin 可以帮助你的golang应用快速实现数据可视化，搭建一个
 
 ## 谁在使用GoAdmin
 
-[评论这个issue告诉我们](https://github.com/huyongchao98/go-admin/issues/71).
+[评论这个issue告诉我们](https://github.com/GoAdminGroup/go-admin/issues/71).
 
 ## 使用
 
@@ -49,7 +56,7 @@ GoAdmin 可以帮助你的golang应用快速实现数据可视化，搭建一个
 
 ```shell
 $ mkdir new_project && cd new_project
-$ go install github.com/huyongchao98/go-admin/adm
+$ go install github.com/GoAdminGroup/go-admin/adm
 $ adm init -l cn
 ```
 
@@ -57,7 +64,7 @@ $ adm init -l cn
 
 ```shell
 $ mkdir new_project && cd new_project
-$ go install github.com/huyongchao98/go-admin/adm
+$ go install github.com/GoAdminGroup/go-admin/adm
 $ adm init web -l cn
 ```
 
@@ -81,17 +88,17 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	_ "github.com/huyongchao98/go-admin/adapter/gin"
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/mysql"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/plugins/admin"
+	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/plugins/admin"
 	"github.com/GoAdminGroup/themes/adminlte"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/template"
-    	"github.com/huyongchao98/go-admin/template/chartjs"
-    	"github.com/huyongchao98/go-admin/template/types"
-	"github.com/huyongchao98/go-admin/examples/datamodel"
-	"github.com/huyongchao98/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/template"
+    	"github.com/GoAdminGroup/go-admin/template/chartjs"
+    	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/examples/datamodel"
+	"github.com/GoAdminGroup/go-admin/modules/language"
 )
 
 func main() {
@@ -132,7 +139,7 @@ func main() {
 	// 增加 chartjs 组件
 	template.AddComp(chartjs.NewChart())
     
-    	_ = eng.AddConfig(&cfg).
+    	_ = eng.AddConfig(cfg).
     		AddGenerators(datamodel.Generators).
     	        // 增加 generator, 第一个参数是对应的访问路由前缀
         	        // 例子:
@@ -152,7 +159,7 @@ func main() {
 </p>
 </details>
 
-更多框架的例子: [https://github.com/huyongchao98/go-admin/tree/master/examples](https://github.com/huyongchao98/go-admin/tree/master/examples)
+更多框架的例子: [https://github.com/GoAdminGroup/go-admin/tree/master/examples](https://github.com/GoAdminGroup/go-admin/tree/master/examples)
 
 ### 第三步：运行
 
@@ -174,9 +181,9 @@ GO111MODULE=on go run main.go
 
 非常欢迎提pr，<strong>这里可以加入开发小组</strong>
 
-<strong>QQ群</strong>：[641768714](https://jq.qq.com/?_wv=1027&k=qn8oXyGC)，记得备注加群来意
+<strong>QQ群</strong>：[874825430](https://jq.qq.com/?_wv=1027&k=CnLiDoT9)，记得备注加群来意
 
-这里是[开发计划](https://github.com/huyongchao98/go-admin/projects)
+这里是[开发计划](https://github.com/GoAdminGroup/go-admin/projects)
 
 <strong>[点击这里申请加微信群（记得备注加群）](http://quick.go-admin.cn/resource/wechat_qrcode_02.jpg)</strong>
 

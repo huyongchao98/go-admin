@@ -13,24 +13,24 @@ import (
 	"plugin"
 	"time"
 
-	"github.com/huyongchao98/go-admin/template/icon"
-	"github.com/huyongchao98/go-admin/template/types/action"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types/action"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/modules/remote_server"
-	"github.com/huyongchao98/go-admin/modules/service"
-	"github.com/huyongchao98/go-admin/modules/ui"
-	"github.com/huyongchao98/go-admin/modules/utils"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/modules/remote_server"
+	"github.com/GoAdminGroup/go-admin/modules/service"
+	"github.com/GoAdminGroup/go-admin/modules/ui"
+	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // Plugin as one of the key components of goAdmin has three
@@ -282,13 +282,12 @@ func Execute(ctx *context.Context, conn db.Connection, navButtons types.Buttons,
 		TmplName:   tmplName,
 		Tmpl:       tmpl,
 		Panel:      panel,
-		Config:     config.Get(),
+		Config:     *config.Get(),
 		Menu:       menu.GetGlobalMenu(user, conn, ctx.Lang()).SetActiveClass(config.URLRemovePrefix(ctx.Path())),
 		Animation:  options.Animation,
 		Buttons:    navButtons.CheckPermission(user),
 		NoCompress: options.NoCompress,
 		IsPjax:     ctx.IsPjax(),
-		Iframe:     ctx.IsIframe(),
 	})
 }
 
@@ -305,14 +304,13 @@ func ExecuteWithCustomMenu(ctx *context.Context,
 		TmplName:   tmplName,
 		Tmpl:       tmpl,
 		Panel:      panel,
-		Config:     config.Get(),
+		Config:     *config.Get(),
 		Menu:       menu,
 		Animation:  options.Animation,
 		Buttons:    navButtons.CheckPermission(user),
 		NoCompress: options.NoCompress,
 		Logo:       template2.HTML(logo),
 		IsPjax:     ctx.IsPjax(),
-		Iframe:     ctx.IsIframe(),
 	})
 }
 
@@ -347,7 +345,7 @@ func ExecuteWithMenu(ctx *context.Context,
 		TmplName:  tmplName,
 		Tmpl:      tmpl,
 		Panel:     panel,
-		Config:    config.Get(),
+		Config:    *config.Get(),
 		Menu:      menu.GetGlobalMenu(user, conn, ctx.Lang(), name).SetActiveClass(config.URLRemovePrefix(ctx.Path())),
 		Animation: options.Animation,
 		Buttons: navButtons.Copy().
@@ -358,7 +356,6 @@ func ExecuteWithMenu(ctx *context.Context,
 		NoCompress: options.NoCompress,
 		Logo:       template2.HTML(logo),
 		IsPjax:     ctx.IsPjax(),
-		Iframe:     ctx.IsIframe(),
 	})
 }
 

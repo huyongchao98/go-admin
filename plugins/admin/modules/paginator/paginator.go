@@ -6,12 +6,12 @@ import (
 	"math"
 	"strconv"
 
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/parameter"
-	template2 "github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/components"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
+	template2 "github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/components"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 type Config struct {
@@ -124,10 +124,6 @@ func Get(cfg Config) types.PaginatorAttribute {
 
 	endNum := paginator.CurPageEndIndex
 	if cfg.Size < cfg.Param.PageSizeInt {
-		endNum = paginator.Total
-	}
-
-	if cfg.Param.PageInt >= (cfg.Size+cfg.Param.PageSizeInt-1)/cfg.Param.PageSizeInt {
 		endNum = paginator.Total
 	}
 

@@ -11,14 +11,14 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/template/types"
 	"github.com/labstack/echo/v4"
 )
 
@@ -170,9 +170,4 @@ func (e *Echo) FormParam() url.Values {
 // IsPjax implements the method Adapter.IsPjax.
 func (e *Echo) IsPjax() bool {
 	return e.ctx.Request().Header.Get(constant.PjaxHeader) == "true"
-}
-
-// Query implements the method Adapter.Query.
-func (e *Echo) Query() url.Values {
-	return e.ctx.Request().URL.Query()
 }

@@ -4,8 +4,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -6,11 +6,10 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/config"
 )
 
 // Postgresql is a Connection of postgresql.
@@ -96,8 +95,6 @@ func (db *Postgresql) InitDB(cfgList map[string]config.Database) Connection {
 	db.Configs = cfgList
 	db.Once.Do(func() {
 		for conn, cfg := range cfgList {
-
-			fmt.Println("检查 pg 配置", cfg.GetDSN())
 
 			sqlDB, err := sql.Open("postgres", cfg.GetDSN())
 			if err != nil {

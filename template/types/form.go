@@ -11,18 +11,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/constant"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/file"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/utils"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
-	form2 "github.com/huyongchao98/go-admin/template/types/form"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/file"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/utils"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	form2 "github.com/GoAdminGroup/go-admin/template/types/form"
 )
 
 type FieldOption struct {
@@ -984,41 +984,18 @@ func (f *FormPanel) FieldOnChooseAjax(field, url string, handler Handler, custom
 }
 
 func (f *FormPanel) FieldOnChooseHide(value string, field ...string) *FormPanel {
-	f.FooterHtml += chooseHideJS(f.FieldList[f.curFieldListIndex].Field, []string{value}, field...)
-	return f
-}
-
-func (f *FormPanel) FieldOnChooseOptionsHide(values []string, field ...string) *FormPanel {
-	f.FooterHtml += chooseHideJS(f.FieldList[f.curFieldListIndex].Field, values, field...)
+	f.FooterHtml += chooseHideJS(f.FieldList[f.curFieldListIndex].Field, value, field...)
 	return f
 }
 
 func (f *FormPanel) FieldOnChooseShow(value string, field ...string) *FormPanel {
-	f.FooterHtml += chooseShowJS(f.FieldList[f.curFieldListIndex].Field, []string{value}, field...)
-	return f
-}
-
-func (f *FormPanel) FieldOnChooseOptionsShow(values []string, field ...string) *FormPanel {
-	f.FooterHtml += chooseShowJS(f.FieldList[f.curFieldListIndex].Field, values, field...)
+	f.FooterHtml += chooseShowJS(f.FieldList[f.curFieldListIndex].Field, value, field...)
 	return f
 }
 
 func (f *FormPanel) FieldOnChooseDisable(value string, field ...string) *FormPanel {
-	f.FooterHtml += chooseDisableJS(f.FieldList[f.curFieldListIndex].Field, []string{value}, field...)
+	f.FooterHtml += chooseDisableJS(f.FieldList[f.curFieldListIndex].Field, value, field...)
 	return f
-}
-
-func (f *FormPanel) addFooterHTML(footer template.HTML) *FormPanel {
-	f.FooterHtml += template.HTML(ParseTableDataTmpl(footer))
-	return f
-}
-
-func (f *FormPanel) AddCSS(css template.CSS) *FormPanel {
-	return f.addFooterHTML(template.HTML("<style>" + css + "</style>"))
-}
-
-func (f *FormPanel) AddJS(js template.JS) *FormPanel {
-	return f.addFooterHTML(template.HTML("<script>" + js + "</script>"))
 }
 
 func searchJS(ext template.JS, url string, handler Handler, delay ...int) (template.JS, context.Node) {
@@ -1087,8 +1064,8 @@ func chooseJS(field, chooseField, val string, value template.HTML) template.HTML
 	}{
 		Field:       template.JS(field),
 		ChooseField: template.JS(chooseField),
-		Value:       decorateChooseValue([]string{string(value)}),
-		Val:         decorateChooseValue([]string{string(val)}),
+		Value:       decorateChooseValue(string(value)),
+		Val:         decorateChooseValue(string(val)),
 	})
 }
 
@@ -1125,7 +1102,7 @@ func chooseAjax(field, chooseField, url string, handler Handler, js ...template.
 		}
 }
 
-func chooseHideJS(field string, value []string, chooseFields ...string) template.HTML {
+func chooseHideJS(field, value string, chooseFields ...string) template.HTML {
 	if len(chooseFields) == 0 {
 		return ""
 	}
@@ -1141,7 +1118,7 @@ func chooseHideJS(field string, value []string, chooseFields ...string) template
 	})
 }
 
-func chooseShowJS(field string, value []string, chooseFields ...string) template.HTML {
+func chooseShowJS(field, value string, chooseFields ...string) template.HTML {
 	if len(chooseFields) == 0 {
 		return ""
 	}
@@ -1157,7 +1134,7 @@ func chooseShowJS(field string, value []string, chooseFields ...string) template
 	})
 }
 
-func chooseDisableJS(field string, value []string, chooseFields ...string) template.HTML {
+func chooseDisableJS(field, value string, chooseFields ...string) template.HTML {
 	if len(chooseFields) == 0 {
 		return ""
 	}
@@ -1173,36 +1150,23 @@ func chooseDisableJS(field string, value []string, chooseFields ...string) templ
 	})
 }
 
-func decorateChooseValue(val []string) template.JS {
-	if len(val) == 0 {
-		return ""
+func decorateChooseValue(val string) template.JS {
+	if val == "" {
+		return `""`
 	}
-
-	res := make([]string, len(val))
-
-	for k, v := range val {
-
-		if v == "" {
-			v = `""`
+	if val[0] != '"' {
+		if strings.Contains(val, "$(this)") {
+			return template.JS(val)
 		}
-
-		if v[0] != '"' {
-			if strings.Contains(v, "$(this)") {
-				res[k] = v
-			}
-			if v == "{{.vue}}" {
-				res[k] = "$(this).v()"
-			}
-			if len(v) > 3 && v[:3] == "js:" {
-				res[k] = v[3:]
-			}
-			res[k] = `"` + v + `"`
-		} else {
-			res[k] = v
+		if val == "{{.Value}}" {
+			return template.JS("$(this).val()")
 		}
+		if len(val) > 3 && val[:3] == "js:" {
+			return template.JS(val[3:])
+		}
+		return template.JS(`"` + val + `"`)
 	}
-
-	return template.JS("[" + strings.Join(res, ",") + "]")
+	return template.JS(val)
 }
 
 // FormPanel attribute setting functions

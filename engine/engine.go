@@ -15,28 +15,28 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/template/icon"
-	"github.com/huyongchao98/go-admin/template/types/action"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/template/icon"
+	"github.com/GoAdminGroup/go-admin/template/types/action"
 
-	"github.com/huyongchao98/go-admin/adapter"
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/modules/service"
-	"github.com/huyongchao98/go-admin/modules/system"
-	"github.com/huyongchao98/go-admin/modules/ui"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/response"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/adapter"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/modules/service"
+	"github.com/GoAdminGroup/go-admin/modules/system"
+	"github.com/GoAdminGroup/go-admin/modules/ui"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // Engine is the core component of goAdmin. It has two attributes.
@@ -137,8 +137,8 @@ func (eng *Engine) announce() *Engine {
 }
 
 // AddConfig set the global config.
-func (eng *Engine) AddConfig(cfg *config.Config) *Engine {
-	return eng.setConfig(cfg).announce().initDatabase()
+func (eng *Engine) AddConfig(cfg config.Config) *Engine {
+	return eng.setConfig(&cfg).announce().initDatabase()
 }
 
 // setConfig set the config of engine.
@@ -541,7 +541,6 @@ func (eng *Engine) HTML(method, url string, fn types.GetPanelInfoFn, noAuth ...b
 			Buttons:      eng.NavButtons.CheckPermission(user),
 			TmplHeadHTML: template.Default().GetHeadHTML(),
 			TmplFootJS:   template.Default().GetFootJS(),
-			Iframe:       ctx.IsIframe(),
 		}))
 
 		if hasError != nil {
@@ -592,7 +591,6 @@ func (eng *Engine) HTMLFile(method, url, path string, data map[string]interface{
 			Buttons:      eng.NavButtons.CheckPermission(user),
 			TmplHeadHTML: template.Default().GetHeadHTML(),
 			TmplFootJS:   template.Default().GetFootJS(),
-			Iframe:       ctx.IsIframe(),
 		}))
 
 		if hasError != nil {
@@ -654,7 +652,6 @@ func (eng *Engine) htmlFilesHandler(data map[string]interface{}, files ...string
 			Buttons:      eng.NavButtons.CheckPermission(user),
 			TmplHeadHTML: template.Default().GetHeadHTML(),
 			TmplFootJS:   template.Default().GetFootJS(),
-			Iframe:       ctx.IsIframe(),
 		}))
 
 		if hasError != nil {
@@ -679,7 +676,6 @@ func (eng *Engine) errorPanelHTML(ctx *context.Context, buf *bytes.Buffer, err e
 		Buttons:      (*eng.NavButtons).CheckPermission(user),
 		TmplHeadHTML: template.Default().GetHeadHTML(),
 		TmplFootJS:   template.Default().GetFootJS(),
-		Iframe:       ctx.IsIframe(),
 	}))
 
 	if hasError != nil {

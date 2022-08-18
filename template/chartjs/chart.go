@@ -3,7 +3,7 @@ package chartjs
 import (
 	"html/template"
 
-	template2 "github.com/huyongchao98/go-admin/template"
+	template2 "github.com/GoAdminGroup/go-admin/template"
 )
 
 type Chart struct {

@@ -5,17 +5,17 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/parameter"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/response"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/response"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // GlobalDeferHandler is a global error handler of admin plugin.
@@ -113,7 +113,7 @@ func (h *Handler) setFormWithReturnErrMessage(ctx *context.Context, errMsg strin
 				f.IsHideResetButton, btnWord)).
 			SetHeader(f.HeaderHtml).
 			SetFooter(f.FooterHtml), len(formInfo.GroupFieldHeaders) > 0,
-			ctx.IsIframe(),
+			ctx.Query(constant.IframeKey) == "true",
 			f.IsHideBackButton, f.Header),
 		Description: template2.HTML(formInfo.Description),
 		Title:       template2.HTML(formInfo.Title),

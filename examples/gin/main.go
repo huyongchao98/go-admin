@@ -6,19 +6,19 @@ import (
 	"os"
 	"os/signal"
 
+	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
 	_ "github.com/GoAdminGroup/themes/sword"
-	_ "github.com/huyongchao98/go-admin/adapter/gin"
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/mysql"
 
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/examples/datamodel"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/language"
+	"github.com/GoAdminGroup/go-admin/plugins/example"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
 	"github.com/GoAdminGroup/themes/adminlte"
 	"github.com/gin-gonic/gin"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/examples/datamodel"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/language"
-	"github.com/huyongchao98/go-admin/plugins/example"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
 )
 
 func main() {
@@ -81,7 +81,7 @@ func main() {
 	//
 	// e.AddConfigFromJSON("../datamodel/config.json")
 
-	if err := e.AddConfig(&cfg).
+	if err := e.AddConfig(cfg).
 		AddGenerators(datamodel.Generators).
 		// add generator, first parameter is the url prefix of table when visit.
 		// example:

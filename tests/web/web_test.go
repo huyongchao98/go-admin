@@ -6,17 +6,17 @@ import (
 	"os"
 	"testing"
 
+	_ "github.com/GoAdminGroup/go-admin/adapter/gin"
+	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
 	_ "github.com/GoAdminGroup/themes/adminlte"
-	_ "github.com/huyongchao98/go-admin/adapter/gin"
-	_ "github.com/huyongchao98/go-admin/modules/db/drivers/mysql"
 
+	"github.com/GoAdminGroup/go-admin/engine"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/plugins/admin"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/chartjs"
+	"github.com/GoAdminGroup/go-admin/tests/tables"
 	"github.com/gin-gonic/gin"
-	"github.com/huyongchao98/go-admin/engine"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/plugins/admin"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/chartjs"
-	"github.com/huyongchao98/go-admin/tests/tables"
 )
 
 const (
@@ -215,7 +215,7 @@ func startServer(quit chan struct{}) {
 		cfg.AccessLogOff = false
 	}
 
-	if err := eng.AddConfig(&cfg).
+	if err := eng.AddConfig(cfg).
 		AddPlugins(adminPlugin).
 		Use(r); err != nil {
 		panic(err)
@@ -530,7 +530,7 @@ func testEditPageOperations(page *Page) {
 	page.Value(birthdayField, "2010-09-05 00:00:00")
 	page.Value(passwordField, "12345678")
 	page.Value(ipField, "127.0.0.1")
-	page.Value(amountField, "15")
+	page.Value(amountField, "15.00")
 
 	page.Click(selectTab)
 

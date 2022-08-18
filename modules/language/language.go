@@ -8,16 +8,15 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/config"
 	"golang.org/x/text/language"
 )
 
 var (
-	EN   = language.English.String()
-	CN   = language.Chinese.String()
-	JP   = language.Japanese.String()
-	TC   = language.TraditionalChinese.String()
-	PTBR = language.BrazilianPortuguese.String()
+	EN = language.English.String()
+	CN = language.Chinese.String()
+	JP = language.Japanese.String()
+	TC = language.TraditionalChinese.String()
 )
 
 func FixedLanguageKey(key string) string {
@@ -32,9 +31,6 @@ func FixedLanguageKey(key string) string {
 	}
 	if key == "tc" {
 		return TC
-	}
-	if key == "pt-br" {
-		return PTBR
 	}
 	return key
 }
@@ -108,17 +104,15 @@ type LangMap map[string]LangSet
 
 // Lang is the global LangMap.
 var Lang = LangMap{
-	language.Chinese.String():             cn,
-	language.English.String():             en,
-	language.Japanese.String():            jp,
-	language.TraditionalChinese.String():  tc,
-	language.BrazilianPortuguese.String(): ptbr,
+	language.Chinese.String():            cn,
+	language.English.String():            en,
+	language.Japanese.String():           jp,
+	language.TraditionalChinese.String(): tc,
 
-	"cn":    cn,
-	"en":    en,
-	"jp":    jp,
-	"tc":    tc,
-	"pt-br": ptbr,
+	"cn": cn,
+	"en": en,
+	"jp": jp,
+	"tc": tc,
 }
 
 // Get get the value from LangMap.

@@ -1,7 +1,7 @@
 package constant
 
 import (
-	"github.com/huyongchao98/go-admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/modules/constant"
 )
 
 const (

@@ -9,18 +9,17 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/huyongchao98/go-admin/context"
-	"github.com/huyongchao98/go-admin/modules/auth"
-	"github.com/huyongchao98/go-admin/modules/config"
-	"github.com/huyongchao98/go-admin/modules/constant"
-	"github.com/huyongchao98/go-admin/modules/db"
-	"github.com/huyongchao98/go-admin/modules/errors"
-	"github.com/huyongchao98/go-admin/modules/logger"
-	"github.com/huyongchao98/go-admin/modules/menu"
-	"github.com/huyongchao98/go-admin/plugins"
-	"github.com/huyongchao98/go-admin/plugins/admin/models"
-	"github.com/huyongchao98/go-admin/template"
-	"github.com/huyongchao98/go-admin/template/types"
+	"github.com/GoAdminGroup/go-admin/context"
+	"github.com/GoAdminGroup/go-admin/modules/auth"
+	"github.com/GoAdminGroup/go-admin/modules/config"
+	"github.com/GoAdminGroup/go-admin/modules/db"
+	"github.com/GoAdminGroup/go-admin/modules/errors"
+	"github.com/GoAdminGroup/go-admin/modules/logger"
+	"github.com/GoAdminGroup/go-admin/modules/menu"
+	"github.com/GoAdminGroup/go-admin/plugins"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/models"
+	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/GoAdminGroup/go-admin/template/types"
 )
 
 // WebFrameWork is an interface which is used as an adapter of
@@ -63,7 +62,6 @@ type WebFrameWork interface {
 	Path() string
 	Method() string
 	FormParam() url.Values
-	Query() url.Values
 	IsPjax() bool
 	Redirect()
 	SetContentType()
@@ -176,7 +174,6 @@ func (base *BaseAdapter) GetContent(ctx interface{}, getPanelFn types.GetPanelFn
 		Buttons:      navButtons.CheckPermission(user),
 		TmplHeadHTML: template.Default().GetHeadHTML(),
 		TmplFootJS:   template.Default().GetFootJS(),
-		Iframe:       newBase.Query().Get(constant.IframeKey) == "true",
 	}))
 
 	if hasError != nil {

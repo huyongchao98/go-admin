@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/huyongchao98/go-admin/plugins/admin/modules"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/constant"
-	"github.com/huyongchao98/go-admin/plugins/admin/modules/form"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/constant"
+	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
 )
 
 type Parameters struct {
@@ -295,17 +295,18 @@ func (param Parameters) GetRouteParamStrWithoutPageSize(page string) string {
 }
 
 func (param Parameters) GetFixedParamStrFromCache() url.Values {
+	p := make(url.Values)
 	if param.cacheFixedStr != nil {
-		return param.cacheFixedStr
+		p = param.cacheFixedStr
+	} else {
+		p = param.GetFixedParamStr()
+		param.cacheFixedStr = p
 	}
-
-	p := param.GetFixedParamStr()
-	param.cacheFixedStr = p
 	return p
 }
 
 func (param Parameters) GetLastPageRouteParamStr(cache ...bool) string {
-	var p url.Values
+	p := make(url.Values)
 	if len(cache) > 0 && cache[0] {
 		p = param.GetFixedParamStrFromCache()
 	} else {
@@ -316,7 +317,7 @@ func (param Parameters) GetLastPageRouteParamStr(cache ...bool) string {
 }
 
 func (param Parameters) GetNextPageRouteParamStr(cache ...bool) string {
-	var p url.Values
+	p := make(url.Values)
 	if len(cache) > 0 && cache[0] {
 		p = param.GetFixedParamStrFromCache()
 	} else {

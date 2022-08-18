@@ -3,7 +3,7 @@ package components
 import (
 	"html/template"
 
-	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/huyongchao98/go-admin/template/types"
 )
 
 type TableAttribute struct {

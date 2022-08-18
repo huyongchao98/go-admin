@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/GoAdminGroup/go-admin/modules/auth"
-	"github.com/GoAdminGroup/go-admin/modules/db"
-	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
+	"github.com/huyongchao98/go-admin/modules/auth"
+	"github.com/huyongchao98/go-admin/modules/db"
+	"github.com/huyongchao98/go-admin/modules/db/dialect"
 	"gopkg.in/ini.v1"
 )
 

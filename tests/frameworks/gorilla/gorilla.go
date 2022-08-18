@@ -2,33 +2,33 @@ package gorilla
 
 import (
 	// add gorilla adapter
-	_ "github.com/GoAdminGroup/go-admin/adapter/gorilla"
-	"github.com/GoAdminGroup/go-admin/modules/config"
-	"github.com/GoAdminGroup/go-admin/modules/language"
-	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
 	"github.com/GoAdminGroup/themes/adminlte"
+	_ "github.com/huyongchao98/go-admin/adapter/gorilla"
+	"github.com/huyongchao98/go-admin/modules/config"
+	"github.com/huyongchao98/go-admin/modules/language"
+	"github.com/huyongchao98/go-admin/plugins/admin/modules/table"
 
 	// add mysql driver
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mysql"
+	_ "github.com/huyongchao98/go-admin/modules/db/drivers/mysql"
 	// add postgresql driver
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/postgres"
+	_ "github.com/huyongchao98/go-admin/modules/db/drivers/postgres"
 	// add sqlite driver
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/sqlite"
+	_ "github.com/huyongchao98/go-admin/modules/db/drivers/sqlite"
 	// add mssql driver
-	_ "github.com/GoAdminGroup/go-admin/modules/db/drivers/mssql"
+	_ "github.com/huyongchao98/go-admin/modules/db/drivers/mssql"
 	// add adminlte ui theme
 	_ "github.com/GoAdminGroup/themes/adminlte"
 
 	"net/http"
 	"os"
 
-	"github.com/GoAdminGroup/go-admin/engine"
-	"github.com/GoAdminGroup/go-admin/plugins/admin"
-	"github.com/GoAdminGroup/go-admin/plugins/example"
-	"github.com/GoAdminGroup/go-admin/template"
-	"github.com/GoAdminGroup/go-admin/template/chartjs"
-	"github.com/GoAdminGroup/go-admin/tests/tables"
 	"github.com/gorilla/mux"
+	"github.com/huyongchao98/go-admin/engine"
+	"github.com/huyongchao98/go-admin/plugins/admin"
+	"github.com/huyongchao98/go-admin/plugins/example"
+	"github.com/huyongchao98/go-admin/template"
+	"github.com/huyongchao98/go-admin/template/chartjs"
+	"github.com/huyongchao98/go-admin/tests/tables"
 )
 
 func newHandler() http.Handler {

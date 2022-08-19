@@ -26,7 +26,6 @@ func Auth(ctx *context.Context) models.UserModel {
 
 // Check check the password and username and return the user model.
 func Check(password string, username string, loginByMobile string, conn db.Connection) (user models.UserModel, ok bool) {
-
 	user = models.User().SetConn(conn).FindByUserName(username)
 
 	if user.IsEmpty() {

@@ -416,6 +416,24 @@ func (t UserModel) UpdatePwd(password string) UserModel {
 }
 
 // UpdatePwd update the password of the user model.
+func (t UserModel) UpdateCode(code string) UserModel {
+
+	currentTime := time.Now().Format("2006-01-02 15:04:05")
+	_, _ = t.Table(t.TableName).
+		Where("id", "=", t.Id).
+		Update(dialect.H{
+			"code":       code,
+			"code_at":    currentTime,
+			"code_count": 0,
+		})
+
+	t.Code = code
+	t.CodeAt = currentTime
+	t.CodeCount = 0
+	return t
+}
+
+// UpdatePwd update the password of the user model.
 func (t UserModel) UpdateCodeCount(codeCount int64) UserModel {
 
 	_, _ = t.Table(t.TableName).

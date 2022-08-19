@@ -553,6 +553,6 @@ func (t UserModel) MapToModel(m map[string]interface{}) UserModel {
 	t.UpdatedAt, _ = m["updated_at"].(string)
 	t.CodeAt, _ = m["code_at"].(string)
 	t.CodeCount, _ = m["code_count"].(int64)
-	t.Code, _ = m["Code"].(string)
+	t.Code, _ = m["code"].(string)
 	return t
 }
